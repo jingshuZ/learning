@@ -11,7 +11,7 @@
 该逻辑有效的前提是相同的元素需要连在一起, 所以需先对数组进行排序
 """
 def threeSum(nums):
-    if len(nums) < 3:#先对数组进行排序
+    if len(nums) < 3:                                                   #先对数组进行排序
         return[]
     nums.sort()
     target_hash = { -x: i for i, x in enumerate(nums)}
@@ -20,13 +20,11 @@ def threeSum(nums):
     for i, first in enumerate(nums):
         if i > 0 and first == nums[i - 1]:
             continue
-        for j, second in enumerate(nums[i + 1:]):
-            #检查两数之和是否存在于哈希表中
+        for j, second in enumerate(nums[i + 1:]):                        #检查两数之和是否存在于哈希表中
             if first + second in target_hash:
                 target_index = target_hash[first + second]
                 if target_index == i or target_index == j:
-                    continue
-                #将找到的结果存入另一个哈希表中，避免结果重复
+                    continue                                             #将找到的结果存入另一个哈希表中，避免结果重复
                 row = sorted([first, second, nums[target_index]])
                 key = ','.join([str(x) for x in row])
                 if key not in res_hash:

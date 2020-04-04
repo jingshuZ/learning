@@ -19,62 +19,24 @@ while (s[i] =='(' and s[i+1] != ']' ) or ( s[i] == '[' and s[i+1] != ')' )
 """
 
 
-
 def generateParenthesis(m, n):
     res = []
     cur_str = ''
     s = m + n
-    def dfs(cur_str, left, right):
-        if left == 0 and right == 0:
-            #if '()' * m in cur_str or '[]' * n in cur_str:
+    def dfs(cur_str, left, right, s):
+        if left == s and right == s:
+            if '()' * m in cur_str or '[]' * n in cur_str:
                 res.append(cur_str)
-                return
-        if right < left:
+        if left < right:
             return
-        if left > -n:
-            dfs(cur_str + '(', left - 1, right)
-        if right > -n:
-            dfs(cur_str + ')', left, right - 1)
-        if left > 0:
-            dfs(cur_str + '[', left - 1, right)
-        if right > 0:
-            dfs(cur_str + ']', left, right - 1)
-            
-    dfs(cur_str, s, s)
+        if left < s and cur_str.count('(') < m:
+            dfs(cur_str + '(', left + 1, right, s)
+        if right < s and cur_str.count(')') < m:
+            dfs(cur_str + ')', left, right + 1, s)
+        if left < s and cur_str.count('[') < n:
+            dfs(cur_str + '[', left + 1, right, s)
+        if right < s and cur_str.count(']') < n:
+            dfs(cur_str + ']', left, right + 1, s)
+    dfs(cur_str, 0, 0, s)
     return res
 print(generateParenthesis(1, 1))
-
-
-
-
-
-# def generateParenthesis(m, n):
-#     res = []
-#     cur_str = ''
-#     s = m + n
-#
-#     def dfs(cur_str, left, right, s):
-#         if left == s and right == s:
-#             if '()' * m in cur_str or '[]' * n in cur_str:
-#                 res.append(cur_str)
-#
-#         if left < right:
-#             return
-#
-#         if left < s and cur_str.count('(') < m:
-#             dfs(cur_str + '(', left + 1, right, s)
-#
-#         if right < s and cur_str.count(')') < m:
-#             dfs(cur_str + ')', left, right + 1, s)
-#
-#         if left < s and cur_str.count('[') < n:
-#             dfs(cur_str + '[', left + 1, right, s)
-#
-#         if right < s and cur_str.count(']') < n:
-#             dfs(cur_str + ']', left, right + 1, s)
-#
-#     dfs(cur_str, 0, 0, s)
-#     return res
-#
-# print(generateParenthesis(1, 1))
-#

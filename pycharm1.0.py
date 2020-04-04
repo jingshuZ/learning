@@ -10,6 +10,7 @@
 另外, 仅在一层循环中加入此逻辑性能最佳.
 该逻辑有效的前提是相同的元素需要连在一起, 所以需先对数组进行排序
 """
+
 def threeSum(nums):
     if len(nums) < 3:                                                   #先对数组进行排序
         return[]
@@ -29,8 +30,11 @@ def threeSum(nums):
                 key = ','.join([str(x) for x in row])
                 if key not in res_hash:
                     res.append(row)
+                    
+                   
     return res
 print(threeSum([3, 4, 5, 0, 1, -5, -6, 8]))
+
 
 """
 三数之和
